@@ -57,9 +57,9 @@ class DenuncianteController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($rutDenunciante)
     {
-        $denunciante = Denunciante::find($id);
+        $denunciante = Denunciante::where('rutDenunciante','=', $rutDenunciante)->first();
 
         return view('denunciante.show', compact('denunciante'));
     }
@@ -70,9 +70,9 @@ class DenuncianteController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($rutDenunciante)
     {
-        $denunciante = Denunciante::find($id);
+        $denunciante = Denunciante::where('rutDenunciante','=', $rutDenunciante)->first();
 
         return view('denunciante.edit', compact('denunciante'));
     }
@@ -99,10 +99,9 @@ class DenuncianteController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy($rutDenunciante)
     {
-        $denunciante = Denunciante::find($id)->delete();
-
+        $denunciante = Denunciante::where('rutDenunciante','=', $rutDenunciante)->first();
         return redirect()->route('denunciantes.index')
             ->with('success', 'Denunciante deleted successfully');
     }

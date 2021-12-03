@@ -36,6 +36,13 @@ class DenunciaController extends Controller
         return view('denuncia.create', compact('denuncia'));
     }
 
+    public function welcome()
+    {
+        $denuncia = new Denuncia();
+        $denunciante = Denunciante::pluck('rutDenunciante','nombreDenunciante');
+        return view('denuncia.index', compact('denuncias','denunciante'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -47,6 +54,10 @@ class DenunciaController extends Controller
         request()->validate(Denuncia::$rules);
 
         $denuncia = Denuncia::create($request->all());
+        if($request->file('file')){
+            $path = Storage::disk('public')->put('file', $request->file('file'));
+            $oirs->fill(['file'=>asset($path)])->save();
+        }
 
         return redirect()->route('denuncias.index')
             ->with('success', 'Denuncia created successfully.');

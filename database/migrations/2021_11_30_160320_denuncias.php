@@ -26,6 +26,11 @@ class Denuncias extends Migration
 
             $table->foreign('rutDenunciante')->references('rutDenunciante')->on('denunciantes')->onDelete('restrict');
         });
+
+        Schema::table('denuncias', function (Blueprint $table) {
+            $table->string('estado')->default('ingresado');
+        });
+        
     }
 
     /**

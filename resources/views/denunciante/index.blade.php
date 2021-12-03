@@ -57,9 +57,9 @@
 											<td>{{ $denunciante->correoDenunciante }}</td>
 
                                             <td>
-                                                <form action="{{ route('denunciantes.destroy',$denunciante->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('denunciantes.show',$denunciante->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('denunciantes.edit',$denunciante->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                <form action="{{ route('denunciantes.destroy',$denunciante->rutDenunciante) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('denunciantes.show',$denunciante->rutDenunciante) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('denunciantes.edit',$denunciante->rutDenunciante) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>

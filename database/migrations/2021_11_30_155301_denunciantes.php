@@ -22,6 +22,11 @@ class Denunciantes extends Migration
             $table->string('correoDenunciante')->nullable();
 
             $table->primary('rutDenunciante');
+            
+        });
+
+        Schema::table('denunciantes', function (Blueprint $table) {
+            $table->unique('correoDenunciante');
         });
     }
 

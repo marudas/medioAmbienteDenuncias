@@ -3,7 +3,7 @@
         
         <div class="form-group">
             {{ Form::label('rutDenunciante') }}
-            {{ Form::text('rutDenunciante', $denunciante->rutDenunciante, ['class' => 'form-control' . ($errors->has('rutDenunciante') ? ' is-invalid' : ''), 'placeholder' => 'Rutdenunciante']) }}
+            {{ Form::text('rutDenunciante', $denunciante->rutDenunciante, ['class' => 'form-control' . ($errors->has('rutDenunciante') ? ' is-invalid' : ''), 'placeholder' => '11111111-1', 'onkeypress'=> 'return numeros(event,this)', 'onfocusout'=>'puntosRut(event,this)']) }}
             {!! $errors->first('rutDenunciante', '<div class="invalid-feedback">:message</p>') !!}
         </div>
         <div class="form-group">

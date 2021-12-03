@@ -2,27 +2,27 @@
     <div class="box-body">
         
         <div class="form-group">
-            {{ Form::label('tipoDenuncia') }}
+            {{ Form::label('tipo de denuncia') }}
             {{ Form::text('tipoDenuncia', $denuncia->tipoDenuncia, ['class' => 'form-control' . ($errors->has('tipoDenuncia') ? ' is-invalid' : ''), 'placeholder' => 'Tipodenuncia']) }}
             {!! $errors->first('tipoDenuncia', '<div class="invalid-feedback">:message</p>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('rutDenunciante') }}
-            {{ Form::text('rutDenunciante', $denuncia->rutDenunciante, ['class' => 'form-control' . ($errors->has('rutDenunciante') ? ' is-invalid' : ''), 'placeholder' => 'Rutdenunciante']) }}
+            {{ Form::label('rut Denunciante') }}
+            {{ Form::text('rutDenunciante', $denuncia->rutDenunciante, ['class' => 'form-control' . ($errors->has('rutDenunciante') ? ' is-invalid' : ''), 'placeholder' => '11111111-1', 'onkeypress'=> 'return numeros(event,this)', 'onfocusout'=>'puntosRut(event,this)'])}}
             {!! $errors->first('rutDenunciante', '<div class="invalid-feedback">:message</p>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('denunciado') }}
+            {{ Form::label('Nombre denunciado ') }}
             {{ Form::text('denunciado', $denuncia->denunciado, ['class' => 'form-control' . ($errors->has('denunciado') ? ' is-invalid' : ''), 'placeholder' => 'Denunciado']) }}
             {!! $errors->first('denunciado', '<div class="invalid-feedback">:message</p>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('direccionDenuncia') }}
-            {{ Form::text('direccionDenuncia', $denuncia->direccionDenuncia, ['class' => 'form-control' . ($errors->has('direccionDenuncia') ? ' is-invalid' : ''), 'placeholder' => 'Direcciondenuncia']) }}
+            {{ Form::label('direccion denunciado') }}
+            {{ Form::text('direccionDenuncia', $denuncia->direccionDenuncia, ['class' => 'form-control' . ($errors->has('direccionDenuncia') ? ' is-invalid' : ''), 'placeholder' => 'Direccion denuncia']) }}
             {!! $errors->first('direccionDenuncia', '<div class="invalid-feedback">:message</p>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('motivo') }}
+            {{ Form::label('motivo de la denuncia') }}
             {{ Form::text('motivo', $denuncia->motivo, ['class' => 'form-control' . ($errors->has('motivo') ? ' is-invalid' : ''), 'placeholder' => 'Motivo']) }}
             {!! $errors->first('motivo', '<div class="invalid-feedback">:message</p>') !!}
         </div>
@@ -33,7 +33,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('file') }}
-            {{ Form::text('file', $denuncia->file, ['class' => 'form-control' . ($errors->has('file') ? ' is-invalid' : ''), 'placeholder' => 'File']) }}
+            {{ Form::file('file', $denuncia->file, ['class' => 'form-control' . ($errors->has('file') ? ' is-invalid' : ''), 'placeholder' => 'File']) }}
             {!! $errors->first('file', '<div class="invalid-feedback">:message</p>') !!}
         </div>
 
