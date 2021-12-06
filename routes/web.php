@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::namespace("App\Http\Controllers")->group(function(){
 
-    Route::get('/', 'denunciaController@welcome')->name('denuncia.welcome');
+    Route::get('/', 'denunciaController@welcome')->name('welcome');
 
     Route::get('/denunciante/index', 'denuncianteController@index')->name('denunciantes.index');
     Route::post('/denunciante/store', 'denuncianteController@store')->name('denunciantes.store');

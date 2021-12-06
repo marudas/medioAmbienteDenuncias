@@ -20,7 +20,7 @@ class DenunciaController extends Controller
     public function index()
     {
         $denuncias = Denuncia::paginate();
-        $denunciante = Denunciante::pluck('rutDenunciante','nombreDenunciante');
+        $denunciante = Denunciante::pluck('rutDenunciante','nombreDenunciante','direccionDenunciante','celularDenunciante','correoDenunciante');
         return view('denuncia.index', compact('denuncias','denunciante'))
             ->with('i', (request()->input('page', 1) - 1) * $denuncias->perPage());
     }
@@ -40,7 +40,7 @@ class DenunciaController extends Controller
     {
         $denuncia = new Denuncia();
         $denunciante = Denunciante::pluck('rutDenunciante','nombreDenunciante');
-        return view('denuncia.index', compact('denuncias','denunciante'));
+        return view('welcome', compact('denuncia','denunciante'));
     }
 
     /**

@@ -1,0 +1,5 @@
+$(function () {
+    $('#rutDenunciante').focusout(function() {
+        
+    });
+});

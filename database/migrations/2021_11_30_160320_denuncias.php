@@ -16,21 +16,16 @@ class Denuncias extends Migration
         Schema::create('denuncias', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('tipoDenuncia')->nullable();
+            $table->string('tipoDenuncia');
             $table->string('rutDenunciante');
             $table->string('denunciado')->nullable();
             $table->string('direccionDenuncia')->nullable();
-            $table->string('motivo')->nullable();
-            $table->string('estado')->nullable();
+            $table->string('motivo');
+            $table->string('estado')->nullable()->default('ingresado');
             $table->string('file')->nullable();
 
             $table->foreign('rutDenunciante')->references('rutDenunciante')->on('denunciantes')->onDelete('restrict');
-        });
-
-        Schema::table('denuncias', function (Blueprint $table) {
-            $table->string('estado')->default('ingresado');
-        });
-        
+        });        
     }
 
     /**

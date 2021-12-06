@@ -16,18 +16,16 @@ class Denunciantes extends Migration
         Schema::create('denunciantes', function (Blueprint $table) {
             $table->timestamps();
             $table->string('rutDenunciante');
-            $table->string('nombreDenunciante')->nullable();
-            $table->string('direccionDenunciante')->nullable();
-            $table->string('celularDenunciante')->nullable();
-            $table->string('correoDenunciante')->nullable();
+            $table->string('nombreDenunciante');
+            $table->string('direccionDenunciante');
+            $table->string('celularDenunciante');
+            $table->string('correoDenunciante')->nullable()->unique();
 
             $table->primary('rutDenunciante');
             
         });
 
-        Schema::table('denunciantes', function (Blueprint $table) {
-            $table->unique('correoDenunciante');
-        });
+
     }
 
     /**
