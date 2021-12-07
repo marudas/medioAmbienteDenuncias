@@ -43,12 +43,30 @@ class DenuncianteController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Denunciante::$rules);
+        //request()->validate(Denunciante::$rules);
+
+        tap(
+            User::create(request()->get('name','username','email')), 
+            fn($user)=> $user->address()
+                      ->save(request()->get('street','city','address')
+         )
 
         $denunciante = Denunciante::create($request->all());
+        //$denunciante->
 
-        return redirect()->route('denunciantes.index')
-            ->with('success', 'Denunciante created successfully.');
+        return redirect()->route('denunciantes.index')->with('success', 'Denunciante created successfully.');
+//        $r = $request->all();
+        return view('home',compact('r'));
+    }
+
+    public function find($rutDenunciante)
+    {
+        $denunciante = Denunciante::where('rutDenunciante','=', $rutDenunciante)->first();
+        if($denunciante!=null){
+            return $denunciante;
+        }else{
+            return false;
+        }        
     }
 
     /**
@@ -63,6 +81,8 @@ class DenuncianteController extends Controller
 
         return view('denunciante.show', compact('denunciante'));
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -101,8 +121,8 @@ class DenuncianteController extends Controller
      */
     public function destroy($rutDenunciante)
     {
-        $denunciante = Denunciante::where('rutDenunciante','=', $rutDenunciante)->first();
-        return redirect()->route('denunciantes.index')
-            ->with('success', 'Denunciante deleted successfully');
+        $denunciante = Denunciante::where('rutDenunciante','=', $rutDenunciante)->delete();
+        //return redirect()->route('denunciantes.index')->with('success', 'Denunciante deleted successfully');
+        return $denunciante;
     }
 }

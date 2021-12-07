@@ -5,6 +5,9 @@
 @endsection
 
 @section('content')
+<!-- CSRF Token -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script src="{{ asset('js/welcome.js') }}" defer></script>
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -62,7 +65,7 @@
                                                     <a class="btn btn-sm btn-success" href="{{ route('denunciantes.edit',$denunciante->rutDenunciante) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-fw fa-trash"></i> Delete</button>
                                                 </form>
                                             </td>
                                         </tr>

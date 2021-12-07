@@ -5,7 +5,9 @@
 @endsection
 
 @section('content')
+
     <script src="{{ asset('js/validarForm.js') }}" defer></script>
+    <script src="{{ asset('js/welcome.js') }}" defer></script>
     <section class="content container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -23,7 +25,7 @@
                                 <div class="row form-group">
                                     <div class="col">
                                         <label for="rutDenunciante">Rut</label>
-                                        <input name="rutDenunciante" id="rutDenunciante" type="text" class="form-control" required onkeypress='return numeros(event,this)', onfocusout='puntosRut(event,this)'>
+                                        <input name="rutDenunciante" id="rutDenunciante" type="text" class="form-control" required onkeypress='return numeros(event,this)' onkeyup='puntosRut(event,this)'>
                                         <div class="invalid-feedback">Indique un rut valido</div>
                                     </div>
                                     <div class="col">
@@ -48,10 +50,7 @@
                                         <input name="direccionDenunciante" id="direccionDenunciante" type="text" class="form-control" required>
                                         <div class="invalid-feedback">Rellene el campo</div>
                                     </div>
-                                </div>
-                                
-                                <div class="row form-group">
-                                    <div class="col">
+                                    <div class="col-4">
                                         <label for="tipoDenuncia">tipo de denuncia</label>
                                         <select name="tipoDenuncia" id="tipoDenuncia" class="form-control" required>
                                             <option value="">Seleccione una opcion</option>
@@ -59,6 +58,14 @@
                                             <option value="2">tipo 2</option>
                                         </select>
                                         <div class="invalid-feedback">Seleccione un tipo de denuncia</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row form-group">
+                                    <div class="col">
+                                        <label for="denunciado">Nombre del denunciado</label>
+                                        <input name="denunciado" id="denunciado" type="text" class="form-control" required>
+                                        <div class="invalid-feedback">Indique el nombre de la persona a la que quiere denunciar</div>
                                     </div>
                                     <div class="col">
                                         <label for="direccionDenuncia">Direccion de la denuncia</label>

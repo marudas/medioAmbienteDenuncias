@@ -18,12 +18,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::namespace("App\Http\Controllers")->group(function(){
 
-    Route::get('/', 'denunciaController@welcome')->name('welcome');
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
     Route::get('/denunciante/index', 'denuncianteController@index')->name('denunciantes.index');
     Route::post('/denunciante/store', 'denuncianteController@store')->name('denunciantes.store');
     Route::get('/denunciante/create', 'denuncianteController@create')->name('denunciantes.create');
     Route::get('/denunciante/show/{rutDenunciante}', 'denuncianteController@show')->name('denunciantes.show');
+    Route::get('/denunciante/find/{rutDenunciante}', 'denuncianteController@find')->name('denunciantes.find');
     Route::put('/denunciante/update', 'denuncianteController@update')->name('denunciantes.update');
     Route::delete('/denunciante/destroy/{rutDenunciante}', 'denuncianteController@destroy')->name('denunciantes.destroy');
     Route::get('/denunciante/edit/{rutDenunciante}', 'denuncianteController@edit')->name('denunciantes.edit');

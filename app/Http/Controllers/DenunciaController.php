@@ -36,13 +36,6 @@ class DenunciaController extends Controller
         return view('denuncia.create', compact('denuncia'));
     }
 
-    public function welcome()
-    {
-        $denuncia = new Denuncia();
-        $denunciante = Denunciante::pluck('rutDenunciante','nombreDenunciante');
-        return view('welcome', compact('denuncia','denunciante'));
-    }
-
     /**
      * Store a newly created resource in storage.
      *
