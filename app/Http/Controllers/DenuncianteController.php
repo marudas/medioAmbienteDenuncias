@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Denunciante;
+use App\Models\Denuncia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class DenuncianteController
@@ -43,20 +45,24 @@ class DenuncianteController extends Controller
      */
     public function store(Request $request)
     {
-        //request()->validate(Denunciante::$rules);
+        $denunciante = Denunciante::updateOrCreate(['rutDenunciante'=>$request->get('rutDenunciante'),
+        'nombreDenunciante' =>$request->get('nombreDenunciante'),'direccionDenunciante'  =>$request->get('direccionDenunciante'),
+        'celularDenunciante' =>$request->get('celularDenunciante'),'correoDenunciante'=>$request->get('correoDenunciante')]);
 
-        tap(
-            User::create(request()->get('name','username','email')), 
-            fn($user)=> $user->address()
-                      ->save(request()->get('street','city','address')
-         )
+        $denuncia = new Denuncia(['tipoDenuncia'=>$request->get('tipoDenuncia'),
+        'rutDenunciante'=>$request->get('rutDenunciante'),'denunciado'=>$request->get('denunciado'),
+        'direccionDenunciado'=>$request->get('direccionDenunciado'),'motivo'=>$request->get('motivo')]);
 
-        $denunciante = Denunciante::create($request->all());
-        //$denunciante->
+        $denunciante->denuncias()->save($denuncia);
+
+        if($request->file('file')){
+            $path = Storage::disk('public')->put('file', $request->file('file'));
+            $denuncia->fill(['file'=>asset($path)])->save();
+        }
 
         return redirect()->route('denunciantes.index')->with('success', 'Denunciante created successfully.');
 //        $r = $request->all();
-        return view('home',compact('r'));
+        //return view('home',compact('r'));
     }
 
     public function find($rutDenunciante)

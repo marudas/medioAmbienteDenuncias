@@ -2,10 +2,6 @@ $(function () {
     $('#rutDenunciante').keyup(function() {        
         rut = $('#rutDenunciante').val();
         if(rut!="" && validarRut(rut)){
-            $('#nombreDenunciante').val();
-            $('#celularDenunciante').val();
-            $('#direccionDenunciante').val();
-            $('#correoDenunciante').val();
             url = "denunciante/find/";
             url = url.concat(rut);
             $.ajax({
@@ -18,6 +14,11 @@ $(function () {
                     $('#celularDenunciante').val(response['celularDenunciante']);
                     $('#direccionDenunciante').val(response['direccionDenunciante']);
                     $('#correoDenunciante').val(response['correoDenunciante']);
+                }else{
+                    $('#nombreDenunciante').val("");
+                    $('#celularDenunciante').val("");
+                    $('#direccionDenunciante').val("");
+                    $('#correoDenunciante').val("");
                 }
             });	
         }

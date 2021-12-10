@@ -63,9 +63,9 @@
                                 
                                 <div class="row form-group">
                                     <div class="col">
-                                        <label for="denunciado">Nombre del denunciado</label>
+                                        <label for="denunciado">Nombre o apodo del denunciado</label>
                                         <input name="denunciado" id="denunciado" type="text" class="form-control" required>
-                                        <div class="invalid-feedback">Indique el nombre de la persona a la que quiere denunciar</div>
+                                        <div class="invalid-feedback">Indique el nombre de la persona a la que quiere denunciar, en caso que no lo tenga ingrese el nombre de pila o apodo</div>
                                     </div>
                                     <div class="col">
                                         <label for="direccionDenuncia">Direccion de la denuncia</label>
