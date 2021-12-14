@@ -6,6 +6,8 @@ use App\Models\Denunciante;
 use App\Models\Denuncia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\SendMail;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * Class DenuncianteController
@@ -60,7 +62,22 @@ class DenuncianteController extends Controller
             $denuncia->fill(['file'=>asset($path)])->save();
         }
 
-        return redirect()->route('denunciantes.index')->with('success', 'Denunciante created successfully.');
+        $email=$request->get('correoDenunciante');
+        if($email != null){ 
+            $data = array(
+                'subject'   =>  "Fiscalización ambiental",
+               'name'      =>  "Fiscalización ambiental",
+               'message'   =>   "$denuncia->id",
+               'destinatarios' => "$denunciante->nombreDenunciante"
+           );
+            $subject="Fiscalización ambiental";  
+            
+            Mail::to($email)->send(new SendMail($subject,$data));
+        }   
+            
+           
+
+        return redirect()->route('/')->with('success', 'Denuncia ingresada con el numero $denuncia->id, para revisar su seguimiento debe hacerlo con su rut en el enlace "Revisa tus denuncias" de este mismo portal');
 //        $r = $request->all();
         //return view('home',compact('r'));
     }

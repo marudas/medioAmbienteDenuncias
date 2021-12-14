@@ -54,8 +54,12 @@
                                         <label for="tipoDenuncia">tipo de denuncia</label>
                                         <select name="tipoDenuncia" id="tipoDenuncia" class="form-control" required>
                                             <option value="">Seleccione una opcion</option>
-                                            <option value="1">tipo 1</option>
-                                            <option value="2">tipo 2</option>
+                                            <option value="1">Tenencia responsable</option>
+                                            <option value="2">Microbasural</option>
+                                            <option value="2">Aguas servidas</option>
+                                            <option value="2">Polusion</option>
+                                            <option value="2">Ruidos molestos</option>
+                                            <option value="2">Quemas</option>
                                         </select>
                                         <div class="invalid-feedback">Seleccione un tipo de denuncia</div>
                                     </div>
@@ -94,4 +98,9 @@
             </div>
         </div>
     </section>
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
 @endsection
