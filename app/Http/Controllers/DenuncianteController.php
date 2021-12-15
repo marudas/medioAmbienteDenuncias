@@ -47,37 +47,49 @@ class DenuncianteController extends Controller
      */
     public function store(Request $request)
     {
-        $denunciante = Denunciante::updateOrCreate(['rutDenunciante'=>$request->get('rutDenunciante'),
-        'nombreDenunciante' =>$request->get('nombreDenunciante'),'direccionDenunciante'  =>$request->get('direccionDenunciante'),
-        'celularDenunciante' =>$request->get('celularDenunciante'),'correoDenunciante'=>$request->get('correoDenunciante')]);
+        request()->validate(Denunciante::$rules);
 
-        $denuncia = new Denuncia(['tipoDenuncia'=>$request->get('tipoDenuncia'),
-        'rutDenunciante'=>$request->get('rutDenunciante'),'denunciado'=>$request->get('denunciado'),
-        'direccionDenunciado'=>$request->get('direccionDenunciado'),'motivo'=>$request->get('motivo')]);
+        $denunciante = Denunciante::create($request->all());
 
-        $denunciante->denuncias()->save($denuncia);
+        return redirect()->route('respuestas.index')
+            ->with('success', 'Respuesta created successfully.');
+    }
+    public function Guardar(Request $request)
+    {   
+        $d = Denunciante::where('correoDenunciante','=', $request->get('correoDenunciante'))->first();
+        if($d==null){
+            $denunciante = Denunciante::updateOrCreate(['rutDenunciante'=>$request->get('rutDenunciante')],[
+            'nombreDenunciante' =>$request->get('nombreDenunciante'),'direccionDenunciante'  =>$request->get('direccionDenunciante'),
+            'celularDenunciante' =>$request->get('celularDenunciante'),'correoDenunciante'=>$request->get('correoDenunciante')]);
 
-        if($request->file('file')){
-            $path = Storage::disk('public')->put('file', $request->file('file'));
-            $denuncia->fill(['file'=>asset($path)])->save();
+            $denuncia = new Denuncia(['tipoDenuncia'=>$request->get('tipoDenuncia'),
+            'rutDenunciante'=>$request->get('rutDenunciante'),'denunciado'=>$request->get('denunciado'),
+            'direccionDenunciado'=>$request->get('direccionDenunciado'),'motivo'=>$request->get('motivo')]);
+
+            $denunciante->denuncias()->save($denuncia);
+
+            if($request->file('file')){
+                $path = Storage::disk('public')->put('file', $request->file('file'));
+                $denuncia->fill(['file'=>asset($path)])->save();
+            }
+
+            $email=$request->get('correoDenunciante');
+            if($email != null){ 
+                $data = array(
+                    'subject'   =>  "Fiscalización ambiental",
+                'name'      =>  "Fiscalización ambiental",
+                'message'   =>   "$denuncia->id",
+                'destinatarios' => "$denunciante->nombreDenunciante"
+            );
+                $subject="Fiscalización ambiental";  
+                
+                Mail::to($email)->send(new SendMail($subject,$data));
+            }   
+            return response('success', 200);
+        }else{
+            return response('false', 200);
         }
-
-        $email=$request->get('correoDenunciante');
-        if($email != null){ 
-            $data = array(
-                'subject'   =>  "Fiscalización ambiental",
-               'name'      =>  "Fiscalización ambiental",
-               'message'   =>   "$denuncia->id",
-               'destinatarios' => "$denunciante->nombreDenunciante"
-           );
-            $subject="Fiscalización ambiental";  
-            
-            Mail::to($email)->send(new SendMail($subject,$data));
-        }   
-            
-           
-
-        return redirect()->route('/')->with('success', 'Denuncia ingresada con el numero $denuncia->id, para revisar su seguimiento debe hacerlo con su rut en el enlace "Revisa tus denuncias" de este mismo portal');
+        //
 //        $r = $request->all();
         //return view('home',compact('r'));
     }

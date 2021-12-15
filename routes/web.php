@@ -22,6 +22,12 @@ Route::namespace("App\Http\Controllers")->group(function(){
         return view('welcome');
     });
 
+    Route::get('/denunciasbuscar', 'denunciaController@buscar')->name('denuncias.buscar');
+
+    Route::post('/denunciante/Guardar', 'denuncianteController@Guardar')->name('denunciantes.Guardar');
+
+
+    // de aqui para abajo son las rutas para que funcionen los crud generados automaticamente.
     Route::get('/denunciante/index', 'denuncianteController@index')->name('denunciantes.index');
     Route::post('/denunciante/store', 'denuncianteController@store')->name('denunciantes.store');
     Route::get('/denunciante/create', 'denuncianteController@create')->name('denunciantes.create');

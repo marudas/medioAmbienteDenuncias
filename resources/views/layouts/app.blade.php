@@ -40,7 +40,7 @@
                             <a class="nav-link" href="{{ url('/') }}">{{ __('Ingresa tu denuncia') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/') }}">{{ __('Revisa tus denuncias') }}</a>
+                            <a class="nav-link" href="{{ url('denuncias.buscar') }}">{{ __('Revisa tus denuncias') }}</a>
                         </li>
                     </ul>
                 @endguest

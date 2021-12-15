@@ -58,6 +58,15 @@ class DenunciaController extends Controller
             ->with('success', 'Denuncia created successfully.');
     }
 
+    public function buscar(Request $request){    
+        if($request->get('rut')){
+            //$buscar = oirs::where("rut", "LIKE", "%{$request->get('rut')}%")
+            //->paginate(20);
+            $buscar=DB::table('oirs')->select()->where('rut','=',$request->get('rut'))->get();
+        return view('denuncias.buscar')->with('buscar', $buscar);
+        }
+        return view('denuncias.buscar');
+    }
     /**
      * Display the specified resource.
      *
