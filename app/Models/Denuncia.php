@@ -55,6 +55,11 @@ class Denuncia extends Model
     {
         return $this->hasMany('App\Models\Respuesta', 'idDenuncia', 'id');
     }
-    
 
+
+    public function denuncias()
+    {
+        return $this->belongsTo(Denunciante
+             ::class);
+    }
 }

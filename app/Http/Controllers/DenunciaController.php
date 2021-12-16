@@ -46,16 +46,27 @@ class DenunciaController extends Controller
     {
         request()->validate(Denuncia::$rules);
 
-        $denuncia = Denuncia::create($request->all());
+        $denuncia = Denuncia::create(['tipoDenuncia'=>$request->get('tipoDenuncia'),
+        'rutDenunciante'=>$request->get('rutDenunciante'),'denunciado'=>$request->get('denunciado'),
+        'direccionDenunciado'=>$request->get('direccionDenunciado'),'motivo'=>$request->get('motivo')]);
         if($request->file('file')){
             $path = Storage::disk('public')->put('file', $request->file('file'));
-            $oirs->fill(['file'=>asset($path)])->save();
+            $denuncia->fill(['file'=>asset($path)])->save();
         }
 
         return redirect()->route('denuncias.index')
             ->with('success', 'Denuncia created successfully.');
     }
 
+    public function buscar(Request $request){    
+        if($request->get('rut')){
+            //$buscar = oirs::where("rut", "LIKE", "%{$request->get('rut')}%")
+            //->paginate(20);
+            $buscar=DB::table('oirs')->select()->where('rut','=',$request->get('rut'))->get();
+        return view('denuncias.buscar')->with('buscar', $buscar);
+        }
+        return view('denuncias.buscar');
+    }
     /**
      * Display the specified resource.
      *

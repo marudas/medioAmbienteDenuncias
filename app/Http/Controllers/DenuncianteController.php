@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Denunciante;
+use App\Models\Denuncia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Mail\SendMail;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * Class DenuncianteController
@@ -43,20 +47,51 @@ class DenuncianteController extends Controller
      */
     public function store(Request $request)
     {
-        //request()->validate(Denunciante::$rules);
-
-        tap(
-            User::create(request()->get('name','username','email')), 
-            fn($user)=> $user->address()
-                      ->save(request()->get('street','city','address')
-         )
+        request()->validate(Denunciante::$rules);
 
         $denunciante = Denunciante::create($request->all());
-        //$denunciante->
 
-        return redirect()->route('denunciantes.index')->with('success', 'Denunciante created successfully.');
+        return redirect()->route('respuestas.index')
+            ->with('success', 'Respuesta created successfully.');
+    }
+    public function Guardar(Request $request)
+    {   
+        $d = Denunciante::where('correoDenunciante','=', $request->get('correoDenunciante'))->first();
+        if($d==null){
+            $denunciante = Denunciante::updateOrCreate(['rutDenunciante'=>$request->get('rutDenunciante')],[
+            'nombreDenunciante' =>$request->get('nombreDenunciante'),'direccionDenunciante'  =>$request->get('direccionDenunciante'),
+            'celularDenunciante' =>$request->get('celularDenunciante'),'correoDenunciante'=>$request->get('correoDenunciante')]);
+
+            $denuncia = new Denuncia(['tipoDenuncia'=>$request->get('tipoDenuncia'),
+            'rutDenunciante'=>$request->get('rutDenunciante'),'denunciado'=>$request->get('denunciado'),
+            'direccionDenunciado'=>$request->get('direccionDenunciado'),'motivo'=>$request->get('motivo')]);
+
+            $denunciante->denuncias()->save($denuncia);
+
+            if($request->file('file')){
+                $path = Storage::disk('public')->put('file', $request->file('file'));
+                $denuncia->fill(['file'=>asset($path)])->save();
+            }
+
+            $email=$request->get('correoDenunciante');
+            if($email != null){ 
+                $data = array(
+                    'subject'   =>  "Fiscalización ambiental",
+                'name'      =>  "Fiscalización ambiental",
+                'message'   =>   "$denuncia->id",
+                'destinatarios' => "$denunciante->nombreDenunciante"
+            );
+                $subject="Fiscalización ambiental";  
+                
+                Mail::to($email)->send(new SendMail($subject,$data));
+            }   
+            return response('success', 200);
+        }else{
+            return response('false', 200);
+        }
+        //
 //        $r = $request->all();
-        return view('home',compact('r'));
+        //return view('home',compact('r'));
     }
 
     public function find($rutDenunciante)
