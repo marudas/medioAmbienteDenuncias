@@ -51,48 +51,47 @@ class DenuncianteController extends Controller
 
         $denunciante = Denunciante::create($request->all());
 
-        return redirect()->route('respuestas.index')
-            ->with('success', 'Respuesta created successfully.');
+        return redirect()->route('denunciante.index')
+            ->with('success', 'denunciante created successfully.');
     }
-    public function Guardar(Request $request)
-    {   
-        $d = Denunciante::where('correoDenunciante','=', $request->get('correoDenunciante'))->first();
-        if($d==null){
-            $denunciante = Denunciante::updateOrCreate(['rutDenunciante'=>$request->get('rutDenunciante')],[
+    public function Guardar(Request $request){
+        
+        $denunciante = Denunciante::where('rutDenunciante','=', $request->get('rutDenunciante'))->first();
+        if($denunciante==null){
+            $denunciante = Denunciante::create(['rutDenunciante'=>$request->get('rutDenunciante'),
             'nombreDenunciante' =>$request->get('nombreDenunciante'),'direccionDenunciante'  =>$request->get('direccionDenunciante'),
             'celularDenunciante' =>$request->get('celularDenunciante'),'correoDenunciante'=>$request->get('correoDenunciante')]);
 
-            $denuncia = new Denuncia(['tipoDenuncia'=>$request->get('tipoDenuncia'),
-            'rutDenunciante'=>$request->get('rutDenunciante'),'denunciado'=>$request->get('denunciado'),
-            'direccionDenunciado'=>$request->get('direccionDenunciado'),'motivo'=>$request->get('motivo')]);
-
-            $denunciante->denuncias()->save($denuncia);
-
-            if($request->file('file')){
-                $path = Storage::disk('public')->put('file', $request->file('file'));
-                $denuncia->fill(['file'=>asset($path)])->save();
-            }
-
-            $email=$request->get('correoDenunciante');
-            if($email != null){ 
-                $data = array(
-                    'subject'   =>  "Fiscalización ambiental",
-                'name'      =>  "Fiscalización ambiental",
-                'message'   =>   "$denuncia->id",
-                'destinatarios' => "$denunciante->nombreDenunciante"
-            );
-                $subject="Fiscalización ambiental";  
-                
-                Mail::to($email)->send(new SendMail($subject,$data));
-            }   
-            return response('success', 200);
         }else{
-            return response('false', 200);
+            $d= Denunciante::where('rutDenunciante','=', $request->get('rutDenunciante'))->update(['nombreDenunciante' =>$request->get('nombreDenunciante'),'direccionDenunciante'  =>$request->get('direccionDenunciante'),
+            'celularDenunciante' =>$request->get('celularDenunciante'),'correoDenunciante'=>$request->get('correoDenunciante')]);
         }
-        //
-//        $r = $request->all();
-        //return view('home',compact('r'));
+        $denuncia = new Denuncia(['tipoDenuncia'=>$request->get('tipoDenuncia'),
+            'rutDenunciante'=>$request->get('rutDenunciante'),'denunciado'=>$request->get('denunciado'),
+            'direccionDenunciado'=>$request->get('direccionDenunciado'),'motivo'=>$request->get('motivo'), 'autorizacion'=>$request->get('autorizacion')]);
+        
+        $denunciante->denuncias()->save($denuncia);
+        if($request->file('file')){
+            $path = Storage::disk('public')->put('file', $request->file('file'));
+            $denuncia->fill(['file'=>asset($path)])->save();
+        }
+
+        $email=$request->get('correoDenunciante');
+        if($email != null){ 
+            $data = array(
+                'subject'   =>  "Fiscalización ambiental",
+            'name'      =>  "Fiscalización ambiental",
+            'message'   =>   "$denuncia->id",
+            'destinatarios' => "$denunciante->nombreDenunciante"
+        );
+            $subject="Fiscalización ambiental";  
+            
+            Mail::to($email)->send(new SendMail($subject,$data));
+        }   
+        return redirect()->route('denunciantes.index')
+            ->with('success', 'denunciante created successfully.'); 
     }
+
 
     public function find($rutDenunciante)
     {

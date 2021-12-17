@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="col">
                                         <label for="file">archivo</label>
-                                        <input name="file" id="file" type="file" class="form-control-file">
+                                        <input name="file" id="file" type="file" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -86,6 +86,19 @@
                                         <label for="motivo">Motivo de la denuncia</label>
                                         <textarea name="motivo" id="motivo" class="form-control" required></textarea>
                                         <div class="invalid-feedback">Indique el motivo de la denuncia</div>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <label for="">autoriza a <b>no recuerdo bien, hay que preguntar</b></label>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2 form-check">
+                                        <input class="form-check-input" type="radio" value="1" id=""  name="autorizacion" required>
+                                        <label class="form-check-label" for="">si</label>
+                                    </div>
+                                    <div class="col-md-2 form-check">
+                                        <input class="form-check-input" type="radio" value="0" id="" name="autorizacion" required>
+                                        <label class="form-check-label" for="">no</label>
+                                        <div class="invalid-feedback">Indique si autoriza el uso de sus datos</div>
                                     </div>
                                 </div>
                                 <div class="box-footer mt20">
@@ -98,9 +111,13 @@
             </div>
         </div>
     </section>
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 @endsection

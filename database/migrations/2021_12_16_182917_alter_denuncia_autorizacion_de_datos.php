@@ -14,7 +14,7 @@ class AlterDenunciaAutorizacionDeDatos extends Migration
     public function up()
     {
         Schema::table('denuncias', function (Blueprint $table) {
-            $table->boolean('autorizacion')->default('0');
+            $table->boolean('autorizacion');
         });
     }
 
