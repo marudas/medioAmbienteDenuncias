@@ -63,9 +63,9 @@ class DenunciaController extends Controller
             //$buscar = oirs::where("rut", "LIKE", "%{$request->get('rut')}%")
             //->paginate(20);
             $buscar=DB::table('oirs')->select()->where('rut','=',$request->get('rut'))->get();
-        return view('denuncias.buscar')->with('buscar', $buscar);
+        return view('denuncia.buscar')->with('buscar', $buscar);
         }
-        return view('denuncias.buscar');
+        return view('denuncia.buscar');
     }
     /**
      * Display the specified resource.
