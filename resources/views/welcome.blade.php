@@ -43,11 +43,11 @@
                                     <div class="col-4">
                                         <label for="correoDenunciante">email</label>
                                         <input name="correoDenunciante" id="correoDenunciante" type="text" class="form-control">
-                                        <div class="invalid-feedback"></div>
+                                        <div class="invalid-feedback">El correo ingresado ya esta registrado</div>
                                     </div>
                                     <div class="col-4">
                                         <label for="direccionDenunciante">direccion</label>
-                                        <input name="direccionDenuncia" id="direccionDenuncia" type="text" class="form-control" required>
+                                        <input name="direccionDenunciante" id="direccionDenunciante" type="text" class="form-control" required>
                                         <div class="invalid-feedback">Rellene el campo</div>
                                     </div>
                                     <div class="col-4">
@@ -78,7 +78,8 @@
                                     </div>
                                     <div class="col">
                                         <label for="file">archivo</label>
-                                        <input name="file" id="file" type="file" class="form-control">
+                                        <input name="file" id="file" type="file" class="form-control" accept=".doc,.docx,.pdf,.jpeg,.jpg,.png,.rar,.zip" size="5mb">
+                                        <div class="invalid-feedback">EL archivo no debe pesar mas de 5mb</div>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -102,7 +103,7 @@
                                     </div>
                                 </div>
                                 <div class="box-footer mt20">
-                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                    <button type="submit" id="submit" class="btn btn-primary">Enviar</button>
                                 </div>
                             </div>                            
                         </form>

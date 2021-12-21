@@ -23,15 +23,35 @@ $(function () {
             });	
         }
     });
-
-
+    $("form").submit(function(e){
+        correo = $('#correoDenunciante').val();
+        if($("form").is(':valid') && correo !=""){    
+            e.preventDefault();        
+            url = "denunciante/buscarMail/";            
+            rut = $('#rutDenunciante').val();
+            url = url.concat(correo+"/"+rut); 
+            $.ajax({
+                url: url,
+                type: 'get',
+            }).done(function(response) {
+                console.log(response);
+                if(response == true){
+                    
+                    $("form")[0].submit();
+                }else{
+                    var campo = document.getElementById("correoDenunciante");
+                    campo.setCustomValidity("no valido");
+                }
+            });	
+        }
+    });
 
 
 
 
 
     ////modulo de prueba para eliminar filas de una tabla
-    $('.btn-delete').click(function(e) {  
+   /*  $('.btn-delete').click(function(e) {  
         e.preventDefault();
         url = $(this).closest('form').attr('action');       console.log(url);
         tr = $(this).closest('tr');
@@ -47,6 +67,6 @@ $(function () {
                 $(this).remove();
             });
         });	    
-    });
+    }); */
     
 });

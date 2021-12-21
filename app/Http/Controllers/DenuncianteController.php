@@ -68,7 +68,7 @@ class DenuncianteController extends Controller
         }
         $denuncia = new Denuncia(['tipoDenuncia'=>$request->get('tipoDenuncia'),
             'rutDenunciante'=>$request->get('rutDenunciante'),'denunciado'=>$request->get('denunciado'),
-            'direccionDenunciado'=>$request->get('direccionDenuncia'),'motivo'=>$request->get('motivo'), 'autorizacion'=>$request->get('autorizacion')]);
+            'direccionDenuncia'=>$request->get('direccionDenuncia'),'motivo'=>$request->get('motivo'), 'autorizacion'=>$request->get('autorizacion')]);
         
         $denunciante->denuncias()->save($denuncia);
         if($request->file('file')){
@@ -92,6 +92,19 @@ class DenuncianteController extends Controller
             ->with('success', 'denunciante created successfully.'); 
     }
 
+    public function buscarMail($correoDenunciante,$rutDenunciante)
+    {
+        $denunciante = Denunciante::where('correoDenunciante','=', $correoDenunciante)->first();
+        if($denunciante!=null){
+            if($denunciante->rutDenunciante == $rutDenunciante){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return true;
+        }        
+    }
 
     public function find($rutDenunciante)
     {
