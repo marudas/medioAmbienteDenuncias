@@ -26,6 +26,8 @@ Route::namespace("App\Http\Controllers")->group(function(){
 
     Route::post('/denunciante/Guardar', 'denuncianteController@Guardar')->name('denunciantes.Guardar');
 
+    Route::get('/download/{file}', 'DownloadsController@download');
+
 
     // de aqui para abajo son las rutas para que funcionen los crud generados automaticamente.
     Route::get('/denunciante/index', 'denuncianteController@index')->name('denunciantes.index');

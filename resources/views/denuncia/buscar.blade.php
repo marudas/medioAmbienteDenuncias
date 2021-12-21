@@ -1,109 +1,63 @@
 @extends('layouts.app')
-
 @section('content')
-
-<!-- Contenedor con clase de bootstrap que realizarÃ¡ la funciÃ³n de centrar toda la informaciÃ³n contenida dentro de este mismo contenedor -->
+<script src="{{ asset('js/validarForm.js') }}" defer></script>
 <div class="container">
-    <!-- Clase de bootstrap que encierra todo la informaciÃ³n en un cuadro -->
-    <div class="card" style="margin-top: 5em;">
-        <!-- Inicio de formulario que consultara los datos a la bd y los mostrarÃ¡ -->
-    <form action="{{route('denuncias.buscar')}}" method="get" onsubmit="return showLoad()">
-         <div class="card-body">
-             
-
-            <center>
-             <h2 style="font-family:dolce;">Buscador</h2><hr style="width: 50%;">
-                <br>
-                <!-- Campo que se le mostrarÃ¡ a la persona el cuÃ¡l podrÃ¡ ingresar el cÃ³digo de seguimiento para que se -->
-                <input type="text" name="rut" style="text-align: center;" class="form-control col-md-7" minlength="8" maxlength="10" onpaste="false"  placeholder="ingrese el rut " required="required" onkeypress="return numeros(event,this)" onfocusout="puntosRut(event,this)">
-                    
-
-        
-            <br>
-            <!-- BotÃ³n que enviarÃ¡ los datos ingresados por la persona que realizÃ³ la consulta -->
-            <button type="submit" class="btn btn-success">Buscar </button>
-          
-   </form>
-   <!-- Termino de formulario -->
+    <div class="row">
+      @csrf    
+      <form action="{{route('denuncias.buscar')}}" method="get" onsubmit="return showLoad()" class="needs-validation" novalidate> 
+        <div class="row">
+          <div class="col-md-3 form-group">
+              <label for="">Buscar por rut</label>
+              <input type="text" class="form-control" name="rutDenunciante" id="rutDenunciante" onkeypress='return numeros(event,this)' onkeyup='puntosRut(event,this)'>
+              <div class="invalid-feedback">Indique un rut valido</div>
+          </div>
+          <div class="col-md-3 form-group">
+              <label for="">Buscar por numero de demanda</label>
+              <input type="text" class="form-control" name="id" id="id">
+          </div> 
+          <div class="col-md-3 form-group">
+              <input type="submit" value="Buscar">
+          </div> 
+        </div>      
+      </form>
+    </div>
 </div>
-
-</div>
-</div>
-            </center>
-    <!-- check if $buscar variable is set, display buscar result -->
+<br>
+@if (isset($buscar))
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <h2>Resultado de búsqueda</h2>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col" style="text-align: center;">Fecha denuncia</th>
+              <th scope="col" style="text-align: center;">Rut</th>
+              <th scope="col" style="text-align: center;">Tipo de denuncia</th>
+              <th scope="col" style="text-align: center;">Denunciado</th>
+              <th scope="col" style="text-align: center;">Dirección denunciado</th>
+              <th scope="col" style="text-align: center;">Estado</th>
+              <th scope="col" style="text-align: center;">Ver detalle</th>
+            </tr>
+          </thead>
+          <tbody>               
+            @foreach($buscar as $buscars)
+              <tr>
+                <td  style="text-align: center;">{{$buscars->created_at}}</td>
+                <td  style="text-align: center;">{{$buscars->rutDenunciante}} </td>
+                <td  style="text-align: center;">{{$buscars->tipoDenuncia}}</td>
+                <td style="text-align: center;">{{$buscars->denunciado}}</td>
+                <td style="text-align: center;">{{$buscars->direccionDenuncia}}</td>                      
+                <td style="text-align: center;">{{$buscars->estado}}</td>
+                <td><a class="btn btn-sm btn-primary " href="{{ route('denuncias.show',$buscars->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a></td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div> 
+    <center><a href="{{route('denuncias.buscar')}}" class="btn btn-info" style="font-family: cambria">Restablecer búsqueda</a></center>
     <br>
-    @if (isset($buscar))
-        <div class="container">
-             <div class="card">
-                <div class="card-body">
-                    <h2 style="font-family: dolce; text-align: center; font-size: 30px;">Resultado de búsqueda</h2><hr style="width: 50%;">
-
-<!-- tabla -->
-
-                <table class="table table-hover" style="font-family: arial; font-size: 15px;">
-                  <thead style="background-color: #464646; color: white;">
-                    <tr>
-                      
-                      <th scope="col" style="text-align: center;">Tipo de persona</th>
-                      <th scope="col" style="text-align: center;">Rut</th>
-                      <th scope="col" style="text-align: center;">Nombre</th>
-                      <th scope="col" style="text-align: center;">Dirección</th>
-                      
-                      <th scope="col" style="text-align: center;">Estado</th>
-
-                      
-                      
-                    </tr>
-
-                  </thead>
-                  <tbody>
-
-                    
-                    <tr>
-
-                      @foreach($buscar as $buscars)
-                     
-                      
-                       <td  style="text-align: center;">{{$buscars->tipo_persona}}
-                       </td>
-                       <td  style="text-align: center;">
-                        
-                        {{$buscars->rut}}
-                       </td>
-                      <td style="text-align: center;">{{$buscars->nombre}}</td>
-                      <td style="text-align: center;">{{$buscars->direccion}}</td>
-                      
-                      <td style="text-align: center;">{{$buscars->estado}}</td>
-                       
-                       
-                    
-                        
-                         
-                        
-                    
-                    </tr>
-                     
-
-                  
-                    
-                    @endforeach
-                  </tbody>
-                </table>
-
-<!-- tabla -->
-
-
-
-                </div>   
-
-                <center><a href="{{route('oirs.busqueda')}}" class="btn btn-info" style="font-family: cambria">Restablecer búsqueda</a></center>
-                <br>
-            </div>
-
-
-        </div>
-
-        
-    @endif
-
-    @stop
+  </div>       
+@endif
+@stop

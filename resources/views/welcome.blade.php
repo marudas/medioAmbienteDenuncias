@@ -47,19 +47,19 @@
                                     </div>
                                     <div class="col-4">
                                         <label for="direccionDenunciante">direccion</label>
-                                        <input name="direccionDenunciante" id="direccionDenunciante" type="text" class="form-control" required>
+                                        <input name="direccionDenuncia" id="direccionDenuncia" type="text" class="form-control" required>
                                         <div class="invalid-feedback">Rellene el campo</div>
                                     </div>
                                     <div class="col-4">
                                         <label for="tipoDenuncia">tipo de denuncia</label>
                                         <select name="tipoDenuncia" id="tipoDenuncia" class="form-control" required>
                                             <option value="">Seleccione una opcion</option>
-                                            <option value="1">Tenencia responsable</option>
-                                            <option value="2">Microbasural</option>
-                                            <option value="2">Aguas servidas</option>
-                                            <option value="2">Polusion</option>
-                                            <option value="2">Ruidos molestos</option>
-                                            <option value="2">Quemas</option>
+                                            <option value="Tenencia responsable">Tenencia responsable</option>
+                                            <option value="Microbasural">Microbasural</option>
+                                            <option value="Aguas servidas">Aguas servidas</option>
+                                            <option value="Polucion">Polucion</option>
+                                            <option value="Ruidos molestos">Ruidos molestos</option>
+                                            <option value="Quemas">Quemas</option>
                                         </select>
                                         <div class="invalid-feedback">Seleccione un tipo de denuncia</div>
                                     </div>

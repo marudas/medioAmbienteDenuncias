@@ -68,7 +68,7 @@ class DenuncianteController extends Controller
         }
         $denuncia = new Denuncia(['tipoDenuncia'=>$request->get('tipoDenuncia'),
             'rutDenunciante'=>$request->get('rutDenunciante'),'denunciado'=>$request->get('denunciado'),
-            'direccionDenunciado'=>$request->get('direccionDenunciado'),'motivo'=>$request->get('motivo'), 'autorizacion'=>$request->get('autorizacion')]);
+            'direccionDenunciado'=>$request->get('direccionDenuncia'),'motivo'=>$request->get('motivo'), 'autorizacion'=>$request->get('autorizacion')]);
         
         $denunciante->denuncias()->save($denuncia);
         if($request->file('file')){

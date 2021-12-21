@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Denuncia;
 use App\Models\Denunciante;
 use Illuminate\Http\Request;
+use DB;
 
 /**
  * Class DenunciaController
@@ -59,11 +60,14 @@ class DenunciaController extends Controller
     }
 
     public function buscar(Request $request){    
-        if($request->get('rut')){
+        if($request->get('rutDenunciante')){
             //$buscar = oirs::where("rut", "LIKE", "%{$request->get('rut')}%")
             //->paginate(20);
-            $buscar=DB::table('oirs')->select()->where('rut','=',$request->get('rut'))->get();
-        return view('denuncia.buscar')->with('buscar', $buscar);
+            $buscar=DB::table('denuncias')->select()->where('rutDenunciante','=',$request->get('rutDenunciante'))->get();
+            return view('denuncia.buscar')->with('buscar', $buscar);
+        }elseif($request->get('id')){
+            $buscar=DB::table('denuncias')->select()->where('id','=',$request->get('id'))->get();
+            return view('denuncia.buscar')->with('buscar', $buscar);
         }
         return view('denuncia.buscar');
     }

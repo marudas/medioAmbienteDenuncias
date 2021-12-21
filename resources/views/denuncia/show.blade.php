@@ -11,15 +11,15 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Show Denuncia</span>
-                        </div>
-                        <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('denuncias.index') }}"> Back</a>
+                            <span class="card-title">Detalle de la denuncia {{ $denuncia->id }}</span>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        
+                        <div class="form-group">
+                            <strong>Fecha de ingreso de la denuncia:</strong>
+                            {{ $denuncia->created_at }}
+                        </div>
                         <div class="form-group">
                             <strong>Tipodenuncia:</strong>
                             {{ $denuncia->tipoDenuncia }}
@@ -41,14 +41,27 @@
                             {{ $denuncia->motivo }}
                         </div>
                         <div class="form-group">
+                            <strong>Autoriza a entregar datos:</strong>
+                            @if($denuncia->autorizacion=="1")
+                                si
+                            @else
+                                no
+                            @endif
+                        </div>
+                        <div class="form-group">
                             <strong>Estado:</strong>
                             {{ $denuncia->estado }}
                         </div>
                         <div class="form-group">
-                            <strong>File:</strong>
-                            {{ $denuncia->file }}
+                            <strong>Ultima actualización de la denuncia:</strong>
+                            {{ $denuncia->updated_at }}
                         </div>
-
+                        @if(!empty( $denuncia->file))
+                        <div class="form-group">
+                            <strong>File:</strong>
+                            <a class="btn btn-sm btn-primary" target="_blank" href="{{ $denuncia->file }}"><i class="fa fa-fw fa-eye"></i> Descargar</a>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
