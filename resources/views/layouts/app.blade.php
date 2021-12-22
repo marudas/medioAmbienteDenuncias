@@ -33,17 +33,28 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                @guest
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/') }}">{{ __('Ingresa tu denuncia') }}</a>
+                            <a class="nav-link" href="{{ url('/') }}">{{ __('Ingresa la denuncia') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('denuncia/buscar') }}">{{ __('Revisa tus denuncias') }}</a>
+                            <a class="nav-link" href="{{ url('denuncia/buscar') }}">{{ __('Buscar denuncias') }}</a>
                         </li>
+                        @role('Admin')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Registrar funcionarios') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('respuesta/index') }}">{{ __('Ingresar Respuesta') }}</a>
+                            </li>
+                        @endrole
+                        @role('Funcionario')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('respuesta/index') }}">{{ __('Ingresar Respuesta') }}</a>
+                            </li>
+                        @endrole
                     </ul>
-                @endguest
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
@@ -51,12 +62,6 @@
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
