@@ -66,5 +66,49 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="float-left">
+                            <span class="card-title">Respuestas</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                    <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="thead">
+                                    <tr>
+                                        <th>id respuestas</th>
+										<th>funcionario</th>
+										<th>Respuesta</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($respuestas as $respuesta)
+                                        <tr>
+                                            <td>{{ ++$i }}</td>
+                                            
+											<td>{{ $respuesta->idDenuncia }}</td>
+											<td>{{ $respuesta->correoFuncionario }}</td>
+											<td>{{ $respuesta->respuesta }}</td>
+
+                                            <td>
+                                                <form action="{{ route('respuestas.destroy',$respuesta->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('respuestas.show',$respuesta->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('respuestas.edit',$respuesta->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+        </div>
     </section>
 @endsection

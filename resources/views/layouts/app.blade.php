@@ -31,10 +31,13 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+                
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registrar funcionarios') }}</a>
+                </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/') }}">{{ __('Ingresa la denuncia') }}</a>
                         </li>
@@ -46,12 +49,12 @@
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('Registrar funcionarios') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('respuesta/index') }}">{{ __('Ingresar Respuesta') }}</a>
+                                <a class="nav-link" href="{{ url('denuncia/index') }}">{{ __('Ingresar Respuesta') }}</a>
                             </li>
                         @endrole
                         @role('Funcionario')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('respuesta/index') }}">{{ __('Ingresar Respuesta') }}</a>
+                                <a class="nav-link" href="{{ url('denuncia/index') }}">{{ __('Ingresar Respuesta') }}</a>
                             </li>
                         @endrole
                     </ul>

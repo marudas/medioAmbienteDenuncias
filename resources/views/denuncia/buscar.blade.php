@@ -31,6 +31,7 @@
         <table class="table table-hover">
           <thead>
             <tr>
+              <th scope="col" style="text-align: center;">Numero</th>
               <th scope="col" style="text-align: center;">Fecha denuncia</th>
               <th scope="col" style="text-align: center;">Rut</th>
               <th scope="col" style="text-align: center;">Tipo de denuncia</th>
@@ -43,6 +44,7 @@
           <tbody>               
             @foreach($buscar as $buscars)
               <tr>
+                <td  style="text-align: center;">{{$buscars->id}}</td>
                 <td  style="text-align: center;">{{$buscars->created_at}}</td>
                 <td  style="text-align: center;">{{$buscars->rutDenunciante}} </td>
                 <td  style="text-align: center;">{{$buscars->tipoDenuncia}}</td>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Denuncia;
 use App\Models\Denunciante;
+use App\Models\Respuesta;
 use Illuminate\Http\Request;
 use DB;
 
@@ -80,8 +81,8 @@ class DenunciaController extends Controller
     public function show($id)
     {
         $denuncia = Denuncia::find($id);
-
-        return view('denuncia.show', compact('denuncia'));
+        $respuestas = Respuesta::pluck('id','created_at','correoFuncionario','respuesta');
+        return view('denuncia.show', compact('denuncia','respuestas'));
     }
 
     /**
