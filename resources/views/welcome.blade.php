@@ -78,8 +78,8 @@
                                     </div>
                                     <div class="col">
                                         <label for="file">archivo</label>
-                                        <input name="file" id="file" type="file" class="form-control" accept=".doc,.docx,.pdf,.jpeg,.jpg,.png,.rar,.zip" size="5mb">
-                                        <div class="invalid-feedback">EL archivo no debe pesar mas de 5mb</div>
+                                        <input name="file" id="file" type="file" class="form-control" accept=".doc,.docx,.pdf,.jpeg,.jpg,.png,.rar,.zip" size="10mb">
+                                        <div class="invalid-feedback">EL archivo no debe pesar mas de 10mb</div>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -90,7 +90,7 @@
                                     </div>
                                 </div>
                                 <div class="row form-group">
-                                    <label for="">autoriza a <b>no recuerdo bien, hay que preguntar</b></label>
+                                    <label for="">autoriza la entrega de sus datos en caso de que sean requeridos por el denunciado</label>
                                     <div class="col-md-1"></div>
                                     <div class="col-md-2 form-check">
                                         <input class="form-check-input" type="radio" value="1" id=""  name="autorizacion" required>
@@ -103,7 +103,7 @@
                                     </div>
                                 </div>
                                 <div class="box-footer mt20">
-                                    <button type="submit" id="submit" class="btn btn-primary">Enviar</button>
+                                    <button type="submit"  class="btn btn-primary">Enviar</button>
                                 </div>
                             </div>                            
                         </form>
@@ -112,13 +112,4 @@
             </div>
         </div>
     </section>
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
 @endsection

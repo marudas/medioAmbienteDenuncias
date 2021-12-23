@@ -8,7 +8,6 @@ $(function () {
                 url: url,
                 type: 'get',
             }).done(function(response) {
-                console.log(response);
                 if(response!=false){
                     $('#nombreDenunciante').val(response['nombreDenunciante']);
                     $('#celularDenunciante').val(response['celularDenunciante']);
@@ -34,9 +33,7 @@ $(function () {
                 url: url,
                 type: 'get',
             }).done(function(response) {
-                console.log(response);
-                if(response == true){
-                    
+                if(response == true){                    
                     $("form")[0].submit();
                 }else{
                     var campo = document.getElementById("correoDenunciante");

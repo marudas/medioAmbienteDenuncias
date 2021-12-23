@@ -50,7 +50,7 @@ Route::namespace("App\Http\Controllers")->group(function(){
 
     Route::get('/respuesta/index', 'respuestaController@index')->name('respuestas.index');
     Route::post('/respuesta/store', 'respuestaController@store')->name('respuestas.store');
-    Route::get('/respuesta/create', 'respuestaController@create')->name('respuestas.create');
+    Route::get('/respuesta/create/{id}', 'respuestaController@create')->name('respuestas.create');
     Route::get('/respuesta/show/{id}', 'respuestaController@show')->name('respuestas.show');
     Route::put('/respuesta/update/{id}', 'respuestaController@update')->name('respuestas.update');
     Route::delete('/respuesta/destroy/{id}', 'respuestaController@destroy')->name('respuestas.destroy');

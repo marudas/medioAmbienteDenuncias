@@ -62,8 +62,6 @@ class DenunciaController extends Controller
 
     public function buscar(Request $request){    
         if($request->get('rutDenunciante')){
-            //$buscar = oirs::where("rut", "LIKE", "%{$request->get('rut')}%")
-            //->paginate(20);
             $buscar=DB::table('denuncias')->select()->where('rutDenunciante','=',$request->get('rutDenunciante'))->get();
             return view('denuncia.buscar')->with('buscar', $buscar);
         }elseif($request->get('id')){
@@ -81,7 +79,7 @@ class DenunciaController extends Controller
     public function show($id)
     {
         $denuncia = Denuncia::find($id);
-        $respuestas = Respuesta::pluck('id','created_at','correoFuncionario','respuesta');
+        $respuestas = Respuesta::where('idDenuncia','=',$id)->get();;
         return view('denuncia.show', compact('denuncia','respuestas'));
     }
 

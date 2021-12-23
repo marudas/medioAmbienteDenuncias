@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Denuncia') }}
+                                {{ __('Listado de denuncias') }}
                             </span>
                         </div>
                     </div>
@@ -27,42 +27,31 @@
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
-                                    <tr>
-                                        <th>No</th>
-                                        
-										<th>Tipodenuncia</th>
-										<th>Rutdenunciante</th>
-										<th>Denunciado</th>
-										<th>Direcciondenuncia</th>
-										<th>Motivo</th>
+                                    <tr>   
+                                        <th>Numero</th>               
+										<th>Fecha denuncia</th>
+										<th>Rut</th>
+										<th>Tipo de denuncia</th>
+                                        <th>Denunciado</th>
+										<th>Dirección denuncia</th>
 										<th>Estado</th>
-										<th>File</th>
-
+										<th>Ver detalle</th>
+                                        <th>Responder</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($denuncias as $denuncia)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $denuncia->tipoDenuncia }}</td>
-											<td>{{ $denuncia->rutDenunciante }}</td>
-											<td>{{ $denuncia->denunciado }}</td>
-											<td>{{ $denuncia->direccionDenuncia }}</td>
-											<td>{{ $denuncia->motivo }}</td>
-											<td>{{ $denuncia->estado }}</td>
-											<td>{{ $denuncia->file }}</td>
-
-                                            <td>
-                                                <form action="{{ route('denuncias.destroy',$denuncia->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('denuncias.show',$denuncia->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('denuncias.edit',$denuncia->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
-                                                </form>
-                                            </td>
+                                            <td>{{$denuncia->id}}</td>
+                                            <td>{{$denuncia->created_at}}</td>
+                                            <td>{{$denuncia->rutDenunciante}} </td>
+                                            <td>{{$denuncia->tipoDenuncia}}</td>
+                                            <td>{{$denuncia->denunciado}}</td>
+                                            <td>{{$denuncia->direccionDenuncia}}</td>                      
+                                            <td>{{$denuncia->estado}}</td>
+                                            <td><a class="btn btn-sm btn-primary " href="{{ route('denuncias.show',$denuncia->id) }}"><i class="fa fa-fw fa-eye"></i></a></td>
+                                            <td><a class="btn btn-sm btn-success" href="{{ route('respuestas.create',$denuncia->id) }}"><i class="fa fa-fw fa-edit"></i> responder</a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>

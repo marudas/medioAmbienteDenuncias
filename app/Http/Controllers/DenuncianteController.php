@@ -88,8 +88,7 @@ class DenuncianteController extends Controller
             
             Mail::to($email)->send(new SendMail($subject,$data));
         }   
-        return redirect()->route('denunciantes.index')
-            ->with('success', 'denunciante created successfully.'); 
+        return redirect()->route('denuncias.buscar')->with('success', 'El numero de su denuncia es el '. $denuncia->id);; 
     }
 
     public function buscarMail($correoDenunciante,$rutDenunciante)

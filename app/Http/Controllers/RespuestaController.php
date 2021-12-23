@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Respuesta;
+use App\Models\Denuncia;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -30,10 +31,10 @@ class RespuestaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($idDenuncia)
     {
         $respuesta = new Respuesta();
-        return view('respuesta.create', compact('respuesta'));
+        return view('respuesta.create', compact('respuesta','idDenuncia'));
     }
 
     /**
@@ -44,12 +45,11 @@ class RespuestaController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Respuesta::$rules);
 
-        $respuesta = Respuesta::create($request->all());
+        $respuesta = Respuesta::create(['idDenuncia'=>$request->get('idDenuncia'),'correoFuncionario'=>$request->get('correoFuncionario'),'respuesta'=>$request->get('respuesta')]);
 
-        return redirect()->route('respuestas.index')
-            ->with('success', 'Respuesta created successfully.');
+        $d = Denuncia::where('id','=', $request->get('idDenuncia'))->update(['estado' =>$request->get('estado')]);
+        return redirect()->route('denuncias.index');
     }
 
     /**

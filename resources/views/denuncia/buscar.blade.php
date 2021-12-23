@@ -2,21 +2,25 @@
 @section('content')
 <script src="{{ asset('js/validarForm.js') }}" defer></script>
 <div class="container">
+  @if ($message = Session::get('success'))
+      <div class="alert alert-success">
+          <p>{{ $message }}</p>
+      </div>
+  @endif
+    <div class="shadow mb-5 p-5 bg-white rounded">
     <div class="row">
       @csrf    
-      <form action="{{route('denuncias.buscar')}}" method="get" onsubmit="return showLoad()" class="needs-validation" novalidate> 
+      <form action="{{route('denuncias.buscar')}}" method="get" class="needs-validation" novalidate> 
         <div class="row">
           <div class="col-md-3 form-group">
-              <label for="">Buscar por rut</label>
-              <input type="text" class="form-control" name="rutDenunciante" id="rutDenunciante" onkeypress='return numeros(event,this)' onkeyup='puntosRut(event,this)'>
+              <input type="text" placeholder="Buscar por RUT" class="form-control" name="rutDenunciante" id="rutDenunciante" onkeypress='return numeros(event,this)' onkeyup='puntosRut(event,this)'>
               <div class="invalid-feedback">Indique un rut valido</div>
           </div>
           <div class="col-md-3 form-group">
-              <label for="">Buscar por numero de demanda</label>
-              <input type="text" class="form-control" name="id" id="id">
+              <input type="text" placeholder="Buscar por número de demanda" class="form-control" name="id" id="id">
           </div> 
           <div class="col-md-3 form-group">
-              <input type="submit" value="Buscar">
+              <input type="submit" class="form-control btn btn-outline-success" value="Buscar">
           </div> 
         </div>      
       </form>
@@ -27,18 +31,18 @@
   <div class="container">
     <div class="card">
       <div class="card-body">
-        <h2>Resultado de búsqueda</h2>
-        <table class="table table-hover">
-          <thead>
+        <h3 style="font-family:constaia;">Resultado de búsqueda</h3><hr>
+        <table class="table">
+          <thead class="thead"  style="background-color: rgb(30, 120, 120); color: white; text-align: center;">
             <tr>
-              <th scope="col" style="text-align: center;">Numero</th>
-              <th scope="col" style="text-align: center;">Fecha denuncia</th>
-              <th scope="col" style="text-align: center;">Rut</th>
-              <th scope="col" style="text-align: center;">Tipo de denuncia</th>
-              <th scope="col" style="text-align: center;">Denunciado</th>
-              <th scope="col" style="text-align: center;">Dirección denunciado</th>
-              <th scope="col" style="text-align: center;">Estado</th>
-              <th scope="col" style="text-align: center;">Ver detalle</th>
+              <th scope="col" style="text-align: center;"> <i class="fas fa-sort-numeric-down"></i> Número</th>
+              <th scope="col" style="text-align: center;"> <i class="far fa-calendar-alt"></i> Fecha denuncia</th>
+              <th scope="col" style="text-align: center;"> <i class="fas fa-sort-numeric-down"></i> Rut</th>
+              <th scope="col" style="text-align: center;"> <i class="fas fa-file-contract"></i> Tipo de denuncia</th>
+              <th scope="col" style="text-align: center;"> <i class="fas fa-user"></i> Denunciado</th>
+              <th scope="col" style="text-align: center;"> <i class="fas fa-home"></i> Dirección denuncia</th>
+              <th scope="col" style="text-align: center;"> <i class="fas fa-cogs"></i> Estado</th>
+              <th scope="col" style="text-align: center;"> <i class="fas fa-search"></i> Ver detalle</th>
             </tr>
           </thead>
           <tbody>               
@@ -58,8 +62,9 @@
         </table>
       </div>
     </div> 
-    <center><a href="{{route('denuncias.buscar')}}" class="btn btn-info" style="font-family: cambria">Restablecer búsqueda</a></center>
+    <center><a href="{{route('denuncias.buscar')}}" class="btn btn-outline-success">Restablecer búsqueda</a></center>
     <br>
   </div>       
+  </div>
 @endif
 @stop

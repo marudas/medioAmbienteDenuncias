@@ -13,8 +13,18 @@
                         <div class="float-left">
                             <span class="card-title">Detalle de la denuncia {{ $denuncia->id }}</span>
                         </div>
+                        @role('admin')
+                        <div class="float-left">
+                            <a class="btn btn-sm btn-success" href="{{ route('respuestas.create',$denuncia->id) }}"><i class="fa fa-fw fa-edit"></i> responder</a>
+                        </div>
+                        @endrole
+                        @role('Funcionario')
+                        <div class="float-left">
+                            <a class="btn btn-sm btn-success" href="{{ route('respuestas.create',$denuncia->id) }}"><i class="fa fa-fw fa-edit"></i> responder</a>
+                        </div>
+                        @endrole
                     </div>
-
+                    
                     <div class="card-body">
                         <div class="form-group">
                             <strong>Fecha de ingreso de la denuncia:</strong>
@@ -33,7 +43,7 @@
                             {{ $denuncia->denunciado }}
                         </div>
                         <div class="form-group">
-                            <strong>Direcciondenuncia:</strong>
+                            <strong>Direccion denuncia:</strong>
                             {{ $denuncia->direccionDenuncia }}
                         </div>
                         <div class="form-group">
@@ -79,30 +89,17 @@
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
-                                        <th>id respuestas</th>
+                                        <th>numero respuestas</th>
 										<th>funcionario</th>
 										<th>Respuesta</th>
-                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($respuestas as $respuesta)
-                                        <tr>
-                                            <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $respuesta->idDenuncia }}</td>
+                                        <tr>                                           
+											<td>{{ $respuesta->id }}</td>
 											<td>{{ $respuesta->correoFuncionario }}</td>
 											<td>{{ $respuesta->respuesta }}</td>
-
-                                            <td>
-                                                <form action="{{ route('respuestas.destroy',$respuesta->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('respuestas.show',$respuesta->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('respuestas.edit',$respuesta->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
-                                                </form>
-                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
