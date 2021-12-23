@@ -22,9 +22,9 @@ $(function () {
             });	
         }
     });
-    $("form").submit(function(e){
+    $("formWelcome").submit(function(e){
         correo = $('#correoDenunciante').val();
-        if($("form").is(':valid') && correo !=""){    
+        if($("formWelcome").is(":valid") && correo !=""){    
             e.preventDefault();        
             url = "denunciante/buscarMail/";            
             rut = $('#rutDenunciante').val();
@@ -34,7 +34,7 @@ $(function () {
                 type: 'get',
             }).done(function(response) {
                 if(response == true){                    
-                    $("form")[0].submit();
+                    $("formWelcome")[0].submit();
                 }else{
                     var campo = document.getElementById("correoDenunciante");
                     campo.setCustomValidity("no valido");

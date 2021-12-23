@@ -13,15 +13,15 @@
                         <div class="float-left">
                             <span class="card-title">Detalle de la denuncia {{ $denuncia->id }}</span>
                         </div>
-                        @role('admin')
-                        <div class="float-left">
-                            <a class="btn btn-sm btn-success" href="{{ route('respuestas.create',$denuncia->id) }}"><i class="fa fa-fw fa-edit"></i> responder</a>
-                        </div>
+                        @role('Admin')
+                            <div class="float-left">
+                                <a class="btn btn-sm btn-success" href="{{ route('respuestas.create',$denuncia->id) }}"><i class="fa fa-fw fa-edit"></i> responder</a>
+                            </div>
                         @endrole
                         @role('Funcionario')
-                        <div class="float-left">
-                            <a class="btn btn-sm btn-success" href="{{ route('respuestas.create',$denuncia->id) }}"><i class="fa fa-fw fa-edit"></i> responder</a>
-                        </div>
+                            <div class="float-left">
+                                <a class="btn btn-sm btn-success" href="{{ route('respuestas.create',$denuncia->id) }}"><i class="fa fa-fw fa-edit"></i> responder</a>
+                            </div>
                         @endrole
                     </div>
                     

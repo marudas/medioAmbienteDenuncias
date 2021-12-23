@@ -19,7 +19,7 @@
                         <span class="card-title">Ingresa tu denuncia</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('denunciantes.Guardar') }}"  role="form" enctype="multipart/form-data" class="needs-validation" novalidate >
+                        <form method="POST" action="{{ route('denunciantes.Guardar') }}" id="formWelcome"  role="form" enctype="multipart/form-data" class="needs-validation" novalidate >
                             @csrf                          
                             <div class="box-body">
                                 <div class="row form-group">
