@@ -22,20 +22,20 @@ Route::namespace("App\Http\Controllers")->group(function(){
         return view('welcome');
     });
 
-    Route::get('/denuncia/buscar', 'denunciaController@buscar')->name('denuncias.buscar');
+    Route::get('/denuncia/buscar', 'DenunciaController@buscar')->name('denuncias.buscar');
 
-    Route::get('/denunciante/buscarMail/{correoDenunciante}/{rutDenunciante}', 'denuncianteController@buscarMail')->name('denunciantes.buscarMail');
-    Route::post('/denunciante/Guardar', 'denuncianteController@Guardar')->name('denunciantes.Guardar');
+    Route::get('/denunciante/buscarMail/{correoDenunciante}/{rutDenunciante}', 'DenuncianteController@buscarMail')->name('denunciantes.buscarMail');
+    Route::post('/denunciante/Guardar', 'DenuncianteController@Guardar')->name('denunciantes.Guardar');
 
     Route::get('/download/{file}', 'DownloadsController@download');
 
 
-    Route::get('/denunciante/find/{rutDenunciante}', 'denuncianteController@find')->name('denunciantes.find');
-    Route::get('/denuncia/index', 'denunciaController@index')->name('denuncias.index');
-    Route::get('/denuncia/show/{id}', 'denunciaController@show')->name('denuncias.show');
+    Route::get('/denunciante/find/{rutDenunciante}', 'DenuncianteController@find')->name('denunciantes.find');
+    Route::get('/denuncia/index', 'DenunciaController@index')->name('denuncias.index');
+    Route::get('/denuncia/show/{id}', 'DenunciaController@show')->name('denuncias.show');
     
-    Route::post('/respuesta/store', 'respuestaController@store')->name('respuestas.store');
-    Route::get('/respuesta/create/{id}', 'respuestaController@create')->name('respuestas.create');
+    Route::post('/respuesta/store', 'RespuestaController@store')->name('respuestas.store');
+    Route::get('/respuesta/create/{id}', 'RespuestaController@create')->name('respuestas.create');
 });
 
 Auth::routes();

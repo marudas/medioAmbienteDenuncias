@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $estado
  * @property $file
  * @property $autorizacion
+ * @property $numero
  * @property Denunciante $denunciante
  * @property Respuesta[] $respuestas
  * @package App
@@ -37,7 +38,7 @@ class Denuncia extends Model
      *
      * @var array
      */
-    protected $fillable = ['tipoDenuncia','rutDenunciante','denunciado','direccionDenuncia','motivo','estado','file','autorizacion'];
+    protected $fillable = ['tipoDenuncia','rutDenunciante','denunciado','direccionDenuncia','motivo','estado','file','autorizacion','numero'];
 
 
     /**

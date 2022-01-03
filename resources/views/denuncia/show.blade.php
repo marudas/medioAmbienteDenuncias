@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Detalle de la denuncia {{ $denuncia->id }}</span>
+                            <span class="card-title">Detalle de la denuncia: <b> {{ $denuncia->numero }}</b></span>
                         </div>
                         @role('Admin')
                             <div class="float-left">
@@ -89,8 +89,8 @@
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
-                                        <th>numero respuestas</th>
-										<th>funcionario</th>
+                                        <th>id respuestas</th>
+										<th>Funcionario</th>
 										<th>Respuesta</th>
                                     </tr>
                                 </thead>
@@ -98,7 +98,7 @@
                                     @foreach ($respuestas as $respuesta)
                                         <tr>                                           
 											<td>{{ $respuesta->id }}</td>
-											<td>{{ $respuesta->correoFuncionario }}</td>
+											<td>{{ $respuesta->name }}</td>
 											<td>{{ $respuesta->respuesta }}</td>
                                         </tr>
                                     @endforeach

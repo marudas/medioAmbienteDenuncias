@@ -61,11 +61,8 @@ class DenunciaController extends Controller
     }
 
     public function buscar(Request $request){    
-        if($request->get('rutDenunciante')){
-            $buscar=DB::table('denuncias')->select()->where('rutDenunciante','=',$request->get('rutDenunciante'))->get();
-            return view('denuncia.buscar')->with('buscar', $buscar);
-        }elseif($request->get('id')){
-            $buscar=DB::table('denuncias')->select()->where('id','=',$request->get('id'))->get();
+        if($request->get('id')){
+            $buscar=DB::table('denuncias')->select()->where('numero','=',$request->get('id'))->get();
             return view('denuncia.buscar')->with('buscar', $buscar);
         }
         return view('denuncia.buscar');
@@ -79,7 +76,9 @@ class DenunciaController extends Controller
     public function show($id)
     {
         $denuncia = Denuncia::find($id);
-        $respuestas = Respuesta::where('idDenuncia','=',$id)->get();;
+        $respuestas = Respuesta::join('users', 'users.email', '=', 'respuestas.correoFuncionario')
+                    ->where('respuestas.idDenuncia','=',$id)->get();
+
         return view('denuncia.show', compact('denuncia','respuestas'));
     }
 

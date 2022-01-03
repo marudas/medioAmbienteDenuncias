@@ -14,46 +14,38 @@
 
                 @includeif('partials.errors')
 
-                <div class="card card-default">
-                    <div class="card-header">
-                        <span class="card-title">Ingresa tu denuncia</span>
-                    </div>
+                <div class="shadow p-5 mb-5 bg-white rounded">
+                <h3 style="font-family:constaia;">Ingresa tu denuncia</h3><hr>
                     <div class="card-body">
                         <form method="POST" action="{{ route('denunciantes.Guardar') }}" id="formWelcome"  role="form" enctype="multipart/form-data" class="needs-validation" novalidate >
                             @csrf                          
                             <div class="box-body">
                                 <div class="row form-group">
                                     <div class="col">
-                                        <label for="rutDenunciante">Rut</label>
-                                        <input name="rutDenunciante" id="rutDenunciante" type="text" class="form-control" required onkeypress='return numeros(event,this)' onkeyup='puntosRut(event,this)'>
+                                        <input name="rutDenunciante" placeholder="Rut" id="rutDenunciante" type="text" class="form-control" required onkeypress='return numeros(event,this)' onkeyup='puntosRut(event,this)'>
                                         <div class="invalid-feedback">Indique un rut valido</div>
-                                    </div>
+                                    </div><br><br><br>
                                     <div class="col">
-                                        <label for="nombreDenunciante">Nombre completo</label>
-                                        <input name="nombreDenunciante" id="nombreDenunciante" type="text" class="form-control" required>
+                                        <input name="nombreDenunciante" placeholder="Nombre Completo" id="nombreDenunciante" type="text" class="form-control" required>
                                         <div class="invalid-feedback">Rellene el campo</div>
                                     </div>
                                     <div class="col">
-                                        <label for="celularDenunciante">Celular</label>
-                                        <input name="celularDenunciante" id="celularDenunciante" type="number" class="form-control" required>
+                                        <input name="celularDenunciante" placeholder="Celular" id="celularDenunciante" type="number" class="form-control" required>
                                         <div class="invalid-feedback">Rellene el campo</div>
                                     </div>
                                 </div>
                                 <div class="row form-group">                                
                                     <div class="col-4">
-                                        <label for="correoDenunciante">email</label>
-                                        <input name="correoDenunciante" id="correoDenunciante" type="text" class="form-control">
+                                        <input name="correoDenunciante" placeholder="Email" id="correoDenunciante" type="text" class="form-control">
                                         <div class="invalid-feedback">El correo ingresado ya esta registrado</div>
-                                    </div>
+                                    </div><br><br><br>
                                     <div class="col-4">
-                                        <label for="direccionDenunciante">direccion</label>
-                                        <input name="direccionDenunciante" id="direccionDenunciante" type="text" class="form-control" required>
+                                        <input name="direccionDenunciante" placeholder="Dirección" id="direccionDenunciante" type="text" class="form-control" required>
                                         <div class="invalid-feedback">Rellene el campo</div>
                                     </div>
                                     <div class="col-4">
-                                        <label for="tipoDenuncia">tipo de denuncia</label>
                                         <select name="tipoDenuncia" id="tipoDenuncia" class="form-control" required>
-                                            <option value="">Seleccione una opcion</option>
+                                            <option value="">Seleccione un tipo de denuncia</option>
                                             <option value="Tenencia responsable">Tenencia responsable</option>
                                             <option value="Microbasural">Microbasural</option>
                                             <option value="Aguas servidas">Aguas servidas</option>
@@ -67,17 +59,14 @@
                                 
                                 <div class="row form-group">
                                     <div class="col">
-                                        <label for="denunciado">Nombre o apodo del denunciado</label>
-                                        <input name="denunciado" id="denunciado" type="text" class="form-control" required>
+                                        <input name="denunciado" placeholder="Nombre o apodo del denunciado" id="denunciado" type="text" class="form-control" required>
                                         <div class="invalid-feedback">Indique el nombre de la persona a la que quiere denunciar, en caso que no lo tenga ingrese el nombre de pila o apodo</div>
-                                    </div>
+                                    </div><br><br><br>
                                     <div class="col">
-                                        <label for="direccionDenuncia">Direccion de la denuncia</label>
-                                        <input name="direccionDenuncia" id="direccionDenuncia" type="text" class="form-control" required>
+                                        <input name="direccionDenuncia" placeholder="Dirección de la denuncia" id="direccionDenuncia" type="text" class="form-control" required>
                                         <div class="invalid-feedback">Indique la direccion que quiere denunciar</div>
                                     </div>
                                     <div class="col">
-                                        <label for="file">archivo</label>
                                         <input name="file" id="file" type="file" class="form-control" accept=".doc,.docx,.pdf,.jpeg,.jpg,.png,.rar,.zip" size="10mb">
                                         <div class="invalid-feedback">EL archivo no debe pesar mas de 10mb</div>
                                     </div>
@@ -85,25 +74,24 @@
                                 <div class="row form-group">
                                     <div class="col">
                                         <label for="motivo">Motivo de la denuncia</label>
-                                        <textarea name="motivo" id="motivo" class="form-control" required></textarea>
+                                        <textarea name="motivo" id="motivo" style="resize:none;" max-length="3" rows="6" class="form-control" required></textarea>
                                         <div class="invalid-feedback">Indique el motivo de la denuncia</div>
                                     </div>
                                 </div>
                                 <div class="row form-group">
                                     <label for="">autoriza la entrega de sus datos en caso de que sean requeridos por el denunciado</label>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2 form-check">
+                                    <div class="col-md-1">
                                         <input class="form-check-input" type="radio" value="1" id=""  name="autorizacion" required>
                                         <label class="form-check-label" for="">si</label>
                                     </div>
-                                    <div class="col-md-2 form-check">
+                                    <div class="col-md-1">
                                         <input class="form-check-input" type="radio" value="0" id="" name="autorizacion" required>
                                         <label class="form-check-label" for="">no</label>
                                         <div class="invalid-feedback">Indique si autoriza el uso de sus datos</div>
                                     </div>
-                                </div>
-                                <div class="box-footer mt20">
-                                    <button type="submit"  class="btn btn-primary">Enviar</button>
+                                </div><hr>
+                                <div class="box-footer" align="right">
+                                    <button type="submit"  class="btn btn-outline-success">Enviar <i class="fas fa-sign-in-alt"></i> </button>
                                 </div>
                             </div>                            
                         </form>

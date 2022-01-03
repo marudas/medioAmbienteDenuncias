@@ -13,9 +13,11 @@
       <p>
         Estimado(a) {{ $data['destinatarios'] }}
         <br><br>
-        Se ha ingresado su denuncia en el portal de fiscalización, para revisar su seguimiento debe hacerlo en mismo portal con su rut o el numero de denuncia {{ $data['message'] }}.
+        Se ha ingresado su denuncia en el portal de fiscalización, para revisar su seguimiento debe hacerlo en mismo portal, http://da.muniquintero.cl/denuncia/buscar, con su código de denuncia: <h3><b> {{ $data['message'] }} </b> </h3>
         <br><br>
         Saludos.
+        <br><br>
+        Este correo se genero de manera automatica, por favor no responder.
       </p>
   </div>
 </body>

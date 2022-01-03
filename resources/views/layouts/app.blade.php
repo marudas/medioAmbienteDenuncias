@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Medio Ambiente</title>
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -18,17 +18,18 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-
+    
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="icon" type="image" href="{{ asset('img/escudo-pie.png')}}">
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Fiscalización
+                   <i class="fas fa-leaf"></i> Fiscalización 
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -38,17 +39,17 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/') }}">{{ __('Ingresa la denuncia') }}</a>
+                            <a class="nav-link" href="{{ url('/') }}"> <i class="fas fa-book-open"></i> {{ ('Ingresa la denuncia') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('denuncia/buscar') }}">{{ __('Buscar denuncias') }}</a>
+                            <a class="nav-link" href="{{ url('denuncia/buscar') }}"> <i class="fas fa-search-plus"></i> {{ __('Buscar denuncias') }}</a>
                         </li>
                         @role('Admin')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Registrar funcionarios') }}</a>
+                                <a class="nav-link" href="{{ route('register') }}"> <i class="fas fa-user"></i> {{ __('Registrar funcionarios') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('denuncia/index') }}">{{ __('Ingresar Respuesta') }}</a>
+                                <a class="nav-link" href="{{ url('denuncia/index') }}"> <i class="fas fa-feather-alt"></i> {{ __('Ingresar Respuesta') }}</a>
                             </li>
                         @endrole
                         @role('Funcionario')
@@ -63,7 +64,7 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}"> <i class="fas fa-user-tie"></i> {{ __('Login') }}</a>
                                 </li>
                             @endif
                         @else

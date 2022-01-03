@@ -55,7 +55,6 @@ class DenuncianteController extends Controller
             ->with('success', 'denunciante created successfully.');
     }
     public function Guardar(Request $request){
-        
         $denunciante = Denunciante::where('rutDenunciante','=', $request->get('rutDenunciante'))->first();
         if($denunciante==null){
             $denunciante = Denunciante::create(['rutDenunciante'=>$request->get('rutDenunciante'),
@@ -66,9 +65,11 @@ class DenuncianteController extends Controller
             $d= Denunciante::where('rutDenunciante','=', $request->get('rutDenunciante'))->update(['nombreDenunciante' =>$request->get('nombreDenunciante'),'direccionDenunciante'  =>$request->get('direccionDenunciante'),
             'celularDenunciante' =>$request->get('celularDenunciante'),'correoDenunciante'=>$request->get('correoDenunciante')]);
         }
+                
         $denuncia = new Denuncia(['tipoDenuncia'=>$request->get('tipoDenuncia'),
             'rutDenunciante'=>$request->get('rutDenunciante'),'denunciado'=>$request->get('denunciado'),
-            'direccionDenuncia'=>$request->get('direccionDenuncia'),'motivo'=>$request->get('motivo'), 'autorizacion'=>$request->get('autorizacion')]);
+            'direccionDenuncia'=>$request->get('direccionDenuncia'),'motivo'=>$request->get('motivo'), 
+            'autorizacion'=>$request->get('autorizacion'), 'numero'=>$this->generateUniqueCode()]);
         
         $denunciante->denuncias()->save($denuncia);
         if($request->file('file')){
@@ -79,16 +80,16 @@ class DenuncianteController extends Controller
         $email=$request->get('correoDenunciante');
         if($email != null){ 
             $data = array(
-                'subject'   =>  "Fiscalización ambiental",
+                'subject'   =>  "Fiscalización ambiental, no responder",
             'name'      =>  "Fiscalización ambiental",
-            'message'   =>   "$denuncia->id",
+            'message'   =>   "$denuncia->numero",
             'destinatarios' => "$denunciante->nombreDenunciante"
         );
             $subject="Fiscalización ambiental";  
             
             Mail::to($email)->send(new SendMail($subject,$data));
         }   
-        return redirect()->route('denuncias.buscar')->with('success', 'El numero de su denuncia es el '. $denuncia->id);; 
+        return redirect()->route('denuncias.buscar')->with('success', 'El código de su denuncia es:  '. $denuncia->numero); 
     }
 
     public function buscarMail($correoDenunciante,$rutDenunciante)
@@ -104,6 +105,15 @@ class DenuncianteController extends Controller
             return true;
         }        
     }
+    public function generateUniqueCode()
+    {
+        do {
+            $numero = substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"), 0, 10);
+        } while (Denuncia::where('numero','=', $numero)->first());
+  
+        return $numero;
+    }
+    
 
     public function find($rutDenunciante)
     {
