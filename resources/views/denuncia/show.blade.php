@@ -31,12 +31,16 @@
                             {{ $denuncia->created_at }}
                         </div>
                         <div class="form-group">
-                            <strong>Tipodenuncia:</strong>
+                            <strong>Tipo de denuncia:</strong>
                             {{ $denuncia->tipoDenuncia }}
                         </div>
                         <div class="form-group">
-                            <strong>Rutdenunciante:</strong>
+                            <strong>Rut denunciante:</strong>
                             {{ $denuncia->rutDenunciante }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Nombre denunciante:</strong>
+                            {{ $denuncia->nombreDenunciante }}
                         </div>
                         <div class="form-group">
                             <strong>Denunciado:</strong>

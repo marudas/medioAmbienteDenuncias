@@ -32,6 +32,11 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->subject($this->subject)->view('mensaje');
+        if(str_contains($this->subject, 'ambiental')){
+            return $this->subject($this->subject)->view('mensaje');
+        }else{
+            return $this->subject($this->subject)->view('mensajeFiscalizadores');
+        }
+        
     }
 }

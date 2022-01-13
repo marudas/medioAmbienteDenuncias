@@ -13,13 +13,26 @@
             <div class="col-md-12">
 
                 @includeif('partials.errors')
-
+               
                 <div class="shadow p-5 mb-5 bg-white rounded">
+                <h6>
+                    Cualquier persona puede denunciar ante el Municipio aquellas actividades, acciones u omisiones que contravengan las Ordenanzas municipales.
+                    Puedes denunciar a través de: 
+                    <ul>
+                        <li>Carta firmada por la denunciante, dirigida al Alcalde ingresada en la Oficina de Partes.</li>
+                        <li>Formulario de denuncia digital.</li>
+                        <li>Correo electrónico a fiscalización.ambiental@muniquintero.cl.</li>
+                    </ul>
+                Una vez hecha la denuncia, su solicitud será ingresada al departamento correspondiente, donde se evaluará la solicitud, se fiscalizará el hecho denunciado en terreno, y se dará respuesta al denunciante indicando la medida tomada por el municipio.
+                </h6>
+                <br>
                 <h3 style="font-family:constaia;">Ingresa tu denuncia</h3><hr>
                     <div class="card-body">
                         <form method="POST" action="{{ route('denunciantes.Guardar') }}" id="formWelcome"  role="form" enctype="multipart/form-data" class="needs-validation" novalidate >
                             @csrf                          
                             <div class="box-body">
+
+                            <h4 style="font-family:constaia;">Datos del denunciante</h4><hr>
                                 <div class="row form-group">
                                     <div class="col">
                                         <input name="rutDenunciante" placeholder="Rut" id="rutDenunciante" type="text" class="form-control" required onkeypress='return numeros(event,this)' onkeyup='puntosRut(event,this)'>
@@ -43,7 +56,10 @@
                                         <input name="direccionDenunciante" placeholder="Dirección" id="direccionDenunciante" type="text" class="form-control" required>
                                         <div class="invalid-feedback">Rellene el campo</div>
                                     </div>
-                                    <div class="col-4">
+                                </div>
+                                <h4 style="font-family:constaia;">Datos de la denuncia</h4><hr>
+                                <div class="row form-group">
+                                    <div class="col">
                                         <select name="tipoDenuncia" id="tipoDenuncia" class="form-control" required>
                                             <option value="">Seleccione un tipo de denuncia</option>
                                             <option value="Tenencia responsable">Tenencia responsable</option>
@@ -52,16 +68,20 @@
                                             <option value="Polucion">Polucion</option>
                                             <option value="Ruidos molestos">Ruidos molestos</option>
                                             <option value="Quemas">Quemas</option>
+                                            <option value="Malos olores">Malos olores</option>
+                                            <option value="Emergencia ambiental">Emergencia ambiental</option>
+                                            <option value="Poda y extraccion de flora">Poda y extraccion de flora</option>
+                                            <option value="Vertimientos">Vertimientos</option>
                                         </select>
                                         <div class="invalid-feedback">Seleccione un tipo de denuncia</div>
                                     </div>
-                                </div>
-                                
-                                <div class="row form-group">
                                     <div class="col">
                                         <input name="denunciado" placeholder="Nombre o apodo del denunciado" id="denunciado" type="text" class="form-control" required>
                                         <div class="invalid-feedback">Indique el nombre de la persona a la que quiere denunciar, en caso que no lo tenga ingrese el nombre de pila o apodo</div>
-                                    </div><br><br><br>
+                                    </div>                                    
+                                </div>
+                                <br>
+                                <div class="row form-group">
                                     <div class="col">
                                         <input name="direccionDenuncia" placeholder="Dirección de la denuncia" id="direccionDenuncia" type="text" class="form-control" required>
                                         <div class="invalid-feedback">Indique la direccion que quiere denunciar</div>
@@ -71,6 +91,7 @@
                                         <div class="invalid-feedback">EL archivo no debe pesar mas de 10mb</div>
                                     </div>
                                 </div>
+                                <br>
                                 <div class="row form-group">
                                     <div class="col">
                                         <label for="motivo">Motivo de la denuncia</label>

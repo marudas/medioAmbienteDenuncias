@@ -81,14 +81,27 @@ class DenuncianteController extends Controller
         if($email != null){ 
             $data = array(
                 'subject'   =>  "Fiscalización ambiental, no responder",
-            'name'      =>  "Fiscalización ambiental",
-            'message'   =>   "$denuncia->numero",
-            'destinatarios' => "$denunciante->nombreDenunciante"
+                'name'      =>  "Fiscalización ambiental",
+                'message'   =>   "$denuncia->numero",
+                'destinatarios' => "$denunciante->nombreDenunciante"
         );
             $subject="Fiscalización ambiental";  
             
             Mail::to($email)->send(new SendMail($subject,$data));
-        }   
+        }  
+
+        $email="fiscalización.ambiental@muniquintero.cl";
+        if($email != null){ 
+            $data = array(
+                'subject'   =>  "Se ha ingresado una denuncia en el portal",
+                'name'      =>  "Fiscalización ambiental",
+                'message'   =>   "$denuncia->numero"
+        );
+            $subject="Fiscalización";  
+            
+            Mail::to($email)->send(new SendMail($subject,$data));
+        }
+        
         return redirect()->route('denuncias.buscar')->with('success', 'El código de su denuncia es:  '. $denuncia->numero); 
     }
 
