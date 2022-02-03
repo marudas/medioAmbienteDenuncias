@@ -75,7 +75,11 @@ class DenunciaController extends Controller
      */
     public function show($id)
     {
-        $denuncia = Denuncia::find($id);
+        $denuncia = DB::table('denuncias')
+            ->join('denunciantes','denunciantes.rutDenunciante','=','denuncias.rutDenunciante')
+            ->select('denuncias.*','denunciantes.nombreDenunciante','denunciantes.celularDenunciante')
+            ->where('denuncias.id' ,'=' , $id)
+            ->first();
         $respuestas = Respuesta::join('users', 'users.email', '=', 'respuestas.correoFuncionario')
                     ->where('respuestas.idDenuncia','=',$id)->get();
 
